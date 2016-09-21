@@ -4,14 +4,14 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.config import Config
 
 
-class TicTacToe(StackLayout):
+class TicTacToe(StackLayout): #StackLayout explanation: https://kivy.org/docs/api-kivy.uix.stacklayout.html
 
     states = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     def __init__(self, **kwargs):
         super(TicTacToe, self).__init__(**kwargs)
-        for x in range(1,10):
-            bt = Button(text=' ', font_size=200, width=200, height=200, size_hint=(None, None), id=str(x))
+        for x in range(9): # range() explanation: http://pythoncentral.io/pythons-range-function-explained/
+            bt = Button(text=' ', font_size=200, width=200, height=200, size_hint=(None, None), id=str(x+1))
             bt.bind(on_release=self.btn_pressed)
             self.add_widget(bt)
 
