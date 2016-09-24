@@ -60,11 +60,12 @@ class TicTacToeApp(App):
     def check_winner(self):
         for combo in self.winning_combos:
             if self.board[combo[0]].text == self.board[combo[1]].text == self.board[combo[2]].text and self.board[combo[0]].text != '':
+                self.game_over = True
                 if self.board[combo[0]].text == self.player:
                     self.popup_message('Player wins!')
                 else:
                     self.popup_message('Bot wins!')
-                self.game_over = True
+
 
     # Resets game state by deleting button values...
     def reset_game(self, popup):
