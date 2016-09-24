@@ -12,6 +12,12 @@ class TicTacToeApp(App):
     title = 'Tic Tac Toe'
     board = []
     choices = ["X","O"]
+    game_over = False
+    winning_combos = [
+        [0,1,2], [3,4,5], [6,7,8], # Horizontal
+        [0,3,6], [1,4,7], [2,5,8], # Vertical
+        [0,4,8], [2,4,6]          # Diagonal
+    ]
 
     # On application build handler
     def build(self):
@@ -29,12 +35,10 @@ class TicTacToeApp(App):
     # On application start handler
     def on_start(self):
         self.init_players();
-        greeting = "Hello Player! You are playing with \"" + self.player + "\""
-        self.popup_message(greeting)
-
 
     # On button pressed handler
     def btn_pressed(self, button):
+        print(int(button.id))
         if len(button.text.strip()) < 1: # Continue only if the button has no mark on it...
             button.text = self.player
             self.bot.make_move(self.board)
@@ -46,14 +50,32 @@ class TicTacToeApp(App):
         self.player = "X" if self.bot.choice == "O" else "O"
         if randint(0,1) == 1:
             self.bot.make_move(self.board)
+            greeting = "Hello Player! Bot plays first! You are playing with \"" + self.player + "\""
+        else:
+            greeting = "Hello Player! You are playing with \"" + self.player + "\""
+        self.popup_message(greeting)
 
 
     # Checks winner after every move...
     def check_winner(self):
-        pass # Just void..
+        for combo in self.winning_combos:
+            if self.board[combo[0]].text == self.board[combo[1]].text == self.board[combo[2]].text and self.board[combo[0]].text != '':
+                if self.board[combo[0]].text == self.player:
+                    self.popup_message('Player wins!')
+                else:
+                    self.popup_message('Bot wins!')
+                self.game_over = True
 
-    def popup_message(self, msg):
-        popup = Popup(title="Welcome!", content=Label(text=msg), size=(300, 100), size_hint=(None, None))
+    # Resets game state by deleting button values...
+    def reset_game(self, popup):
+        if self.game_over:
+            for button in self.board:
+                button.text = ''
+            self.game_over = False
+
+    def popup_message(self, msg, title="Welcome!", reset="Hello!"):
+        popup = Popup(title=title, content=Label(text=msg), size=(435, 100), size_hint=(None, None))
+        popup.bind(on_dismiss=self.reset_game)
         popup.open()
 
 
