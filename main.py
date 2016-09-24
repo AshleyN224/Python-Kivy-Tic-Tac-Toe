@@ -15,12 +15,12 @@ class TicTacToeApp(App):
 
     # On application build handler
     def build(self):
-        Config.set('graphics', 'width', '600')
-        Config.set('graphics', 'height', '600')
+        Config.set('graphics', 'width', '450')
+        Config.set('graphics', 'height', '450')
         Config.set('graphics','resizable', False)
         self.layout = StackLayout()
         for x in range(9): # range() explanation: http://pythoncentral.io/pythons-range-function-explained/
-            bt = Button(text='', font_size=200, width=200, height=200, size_hint=(None, None), id=str(x))
+            bt = Button(text='', font_size=120, width=150, height=150, size_hint=(None, None), id=str(x))
             bt.bind(on_release=self.btn_pressed)
             self.board.append(bt)
             self.layout.add_widget(bt)
