@@ -29,8 +29,8 @@ class TicTacToe(App):
     def on_start(self):
         self.init_players();
         greeting = "Hello Player! You are playing with \"" + self.player + "\""
-        popup = Popup(title="Welcome!", content=Label(text=greeting), size=(300, 100), size_hint=(None, None))
-        popup.open()
+        self.popup_message(greeting)
+
 
     # On button pressed handler
     def btn_pressed(self, button):
@@ -48,6 +48,11 @@ class TicTacToe(App):
     # Checks winner after every move...
     def check_winner(self):
         pass # Just void..
+
+    def popup_message(self, msg):
+        popup = Popup(title="Welcome!", content=Label(text=msg), size=(300, 100), size_hint=(None, None))
+        popup.open()
+
 
 if __name__ == '__main__':
     TicTacToe().run()
