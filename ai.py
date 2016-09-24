@@ -15,6 +15,6 @@ class Ai:
             if len(button.text.strip()) < 1: # If the button has no mark, stripping spaces...
                 free_buttons.append(button)
 
-        if len(free_buttons) > 1: # If any free buttons left... let's make the move
+        if len(free_buttons) >= 1: # If any free buttons left... let's make the move
             rand = randint(0, len(free_buttons) - 1) # Generate a random integer from 0 to the length of the array
             free_buttons[rand].text = self.choice
