@@ -7,7 +7,7 @@ from kivy.config import Config
 from ai import Ai
 from random import randint
 
-class TicTacToe(App):
+class TicTacToeApp(App):
 
     title = 'Tic Tac Toe'
     board = []
@@ -17,6 +17,7 @@ class TicTacToe(App):
     def build(self):
         Config.set('graphics', 'width', '600')
         Config.set('graphics', 'height', '600')
+        Config.set('graphics','resizable', False)
         self.layout = StackLayout()
         for x in range(9): # range() explanation: http://pythoncentral.io/pythons-range-function-explained/
             bt = Button(text='', font_size=200, width=200, height=200, size_hint=(None, None), id=str(x))
@@ -55,4 +56,4 @@ class TicTacToe(App):
 
 
 if __name__ == '__main__':
-    TicTacToe().run()
+    TicTacToeApp().run()
