@@ -41,7 +41,7 @@ class TicTacToeApp(App):
         print(int(button.id))
         if len(button.text.strip()) < 1: # Continue only if the button has no mark on it...
             button.text = self.player
-            self.bot.make_move(self.board)
+            self.bot.make_move(self.board, self.winning_combos)
             self.check_winner()
 
     # Initializes players
@@ -49,7 +49,7 @@ class TicTacToeApp(App):
         self.bot = Ai(self.choices[randint(0,1)]);
         self.player = "X" if self.bot.choice == "O" else "O"
         if randint(0,1) == 1:
-            self.bot.make_move(self.board)
+            self.bot.make_move(self.board, self.winning_combos)
             greeting = "Hello Player! Bot plays first! You are playing with \"" + self.player + "\""
         else:
             greeting = "Hello Player! You are playing with \"" + self.player + "\""
